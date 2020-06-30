@@ -63,6 +63,20 @@ def mid_porder_traversal(node : TreeNode):
         # 读取右子树
         mid_porder_traversal(node.right)
 
+def prev_order_traversal_with_stack(node : TreeNode):
+    """
+    用 stack 实现遍历（回溯）
+    """
+    stack = []
+    while node is not None or len(stack)>0:
+        while node is not None:
+            print(node.data)
+            stack.append(node)
+            node = node.left
+        if len(stack) > 0:
+            node = stack.pop()
+            node = node.right
+
 if __name__ == "__main__":
     input = [3,2,9,None,None,10,None,None,8,None,4]
     root = create_binary_tree(input)
@@ -72,3 +86,5 @@ if __name__ == "__main__":
     last_order_traversal(root)
     print("中序遍历")
     mid_porder_traversal(root)
+    print("先序遍历")
+    prev_order_traversal_with_stack(root)
