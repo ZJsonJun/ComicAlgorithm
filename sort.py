@@ -100,12 +100,48 @@ def cock_tail_sort(data : []):
         if is_sorted:
             break
 
+def quick_sort(start_index: int,end_index: int,array: []):
+    """
+    快速排序（递归实现）
+    """
+    # 出口条件
+    if start_index>=end_index:
+        return
+    # 定位基准元素放置位置
+    pivot_index = partition_v1(start_index,end_index,array)
+    # 分治
+    quick_sort(start_index,pivot_index-1,array)
+    quick_sort(pivot_index+1,end_index,array)
+
+def partition_v1(start_index: int,end_index: int,array: []):
+    """
+    双边循环法，定位基准元素放置位置（快排）
+    """
+    # 选择数组首元素作为基准元素
+    pivot = array[start_index]
+    left = start_index  # 左指针
+    right = end_index   # 右指针
+    while(left != right):
+        # 先尝试移动右指针
+        while left<right and array[right]>pivot:
+            right-=1
+        # 尝试移动左指针
+        while left<right and array[left]<=pivot:
+            left+=1
+        # 交换左右指针所指向元素
+        tmp = array[left]
+        array[left] = array[right]
+        array[right] = tmp
+    # 交换pivot 到左右指针重合的位置（其在有序数组中的位置）
+    array[start_index] = array[left]
+    array[left] = pivot
+    return left
 
 
 if __name__ == "__main__":
     input = [12,1,11,9,1,2,4,8,9,3,6,7,20,100,10,201,45,2,3,47,99,88,77,12,89]
     print("排序前数组：")
     print(input)
-    cock_tail_sort(input)
+    quick_sort(0,len(input)-1,input)
     print("排序后数组：")
     print(input)
