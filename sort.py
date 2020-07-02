@@ -108,7 +108,7 @@ def quick_sort(start_index: int,end_index: int,array: []):
     if start_index>=end_index:
         return
     # 定位基准元素放置位置
-    pivot_index = partition_v1(start_index,end_index,array)
+    pivot_index = partition_v2(start_index,end_index,array)
     # 分治
     quick_sort(start_index,pivot_index-1,array)
     quick_sort(pivot_index+1,end_index,array)
@@ -136,6 +136,25 @@ def partition_v1(start_index: int,end_index: int,array: []):
     array[start_index] = array[left]
     array[left] = pivot
     return left
+
+def partition_v2(start_index: int,end_index: int,array: []):
+    """
+    单边循环法，定位基准元素放置位置（快排）
+    """
+    # 选择数组首元素作为基准元素
+    pivot = array[start_index]
+    # 标记小于基准元素区域边界
+    mark = start_index
+    for i in range(start_index+1,end_index+1):
+        if array[i]<pivot:
+            mark+=1
+            tmp = array[i]
+            array[i] = array[mark]
+            array[mark] = tmp
+    # 最后将pivot 交换到基准位置
+    array[start_index] = array[mark]
+    array[mark] = pivot
+    return mark
 
 
 if __name__ == "__main__":
