@@ -113,6 +113,28 @@ def quick_sort(start_index: int,end_index: int,array: []):
     quick_sort(start_index,pivot_index-1,array)
     quick_sort(pivot_index+1,end_index,array)
 
+def quick_sort_stack(start_index: int,end_index: int,array: []):
+    """
+    快速排序（栈实现）
+    """
+    # 创建一个栈，保存递归调用函数的参数
+    stack = []
+    # 整个数组的起始和终止下标，以key-value形式入栈
+    root_param = {"start_index":start_index, "end_index":end_index}
+    stack.append(root_param)
+    # 循环结束条件： 栈为空时结束
+    while len(stack)>0:
+        # 栈顶元素出栈，得到起始和终止下标
+        param = stack.pop()
+        pivot_index = partition_v2(param.get("start_index"),param.get("end_index"),array)
+        # 根据基准元素位置，把剩下数组划分为两部分，并将每部分的起止下标入栈
+        if param.get("start_index")<pivot_index-1:
+            left_param = {"start_index":param.get("start_index"), "end_index":pivot_index-1}
+            stack.append(left_param)
+        if param.get("end_index")>pivot_index+1:
+            right_param = {"start_index":pivot_index+1, "end_index":param.get("end_index")}
+            stack.append(right_param)
+
 def partition_v1(start_index: int,end_index: int,array: []):
     """
     双边循环法，定位基准元素放置位置（快排）
@@ -161,6 +183,6 @@ if __name__ == "__main__":
     input = [12,1,11,9,1,2,4,8,9,3,6,7,20,100,10,201,45,2,3,47,99,88,77,12,89]
     print("排序前数组：")
     print(input)
-    quick_sort(0,len(input)-1,input)
+    quick_sort_stack(0,len(input)-1,input)
     print("排序后数组：")
     print(input)
