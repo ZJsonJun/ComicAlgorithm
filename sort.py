@@ -188,8 +188,8 @@ def heap_sort(array: []):
         tmp = array[0]
         array[0] = array[tail]
         array[tail] = tmp
-        # 重新构建堆
-        build_heap(array,tail)
+        # 重新构建堆(下沉根节点)
+        down_adjust(array,0,tail)
 
 def build_heap(array: [], spec_len: int):
     """
