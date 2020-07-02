@@ -53,7 +53,7 @@ def bubble_sort_v3(data : []):
     set_border = len(data)-1
     # 记录最后一次交换位置
     last_swap_index = 0
-    for i in range(len(data)-1):
+    for _ in range(len(data)-1):
         # 先将flag置位
         is_sorted = True
         for j in range(set_border):
