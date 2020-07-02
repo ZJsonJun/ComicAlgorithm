@@ -178,11 +178,59 @@ def partition_v2(start_index: int,end_index: int,array: []):
     array[mark] = pivot
     return mark
 
+def heap_sort(array: []):
+    """
+    堆排序（从小到大排序，需要构建最大堆）
+    """
+    build_heap(array,len(array))
+    # 交换堆顶元素与堆尾元素(将大节点集中在堆尾)
+    for tail in range(len(array)-1,0,-1):
+        tmp = array[0]
+        array[0] = array[tail]
+        array[tail] = tmp
+        # 重新构建堆
+        build_heap(array,tail)
+
+def build_heap(array: [], spec_len: int):
+    """
+    构建最大堆，可以指定构建区域
+    """
+    # 依次对每个非叶子节点进行下沉操作
+    for i in range((len(array)-2)//2,-1,-1):
+        down_adjust(array,i,spec_len)
+
+def down_adjust(array: [],index: int, spec_len: int):
+    """
+    下沉操作(小节点下沉),改造了下，可以指定待调整数组长度（区域）
+    """
+    while index*2+1<spec_len or index*2+2<spec_len:
+        # 存在左右子节点
+        if index*2+2<spec_len:
+            swap_index = index*2+1 if array[index*2+1]>array[index*2+2] else index*2+2
+            if array[index]<array[swap_index]:
+                tmp = array[index]
+                array[index] = array[swap_index]
+                array[swap_index] = tmp
+                index = swap_index
+            else:
+                break
+        # 只存在左子节点
+        else:
+            if array[index]<array[index*2+1]:
+                tmp = array[index]
+                array[index] = array[index*2+1]
+                array[index*2+1] = tmp
+                index = index*2+1
+            else:
+                break
+        
+
 
 if __name__ == "__main__":
     input = [12,1,11,9,1,2,4,8,9,3,6,7,20,100,10,201,45,2,3,47,99,88,77,12,89]
     print("排序前数组：")
     print(input)
-    quick_sort_stack(0,len(input)-1,input)
+    # quick_sort_stack(0,len(input)-1,input)
+    heap_sort(input)
     print("排序后数组：")
     print(input)
