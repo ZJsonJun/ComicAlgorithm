@@ -50,6 +50,4 @@ if __name__ == "__main__":
     input = [20,15,14,10,9,1,0]
     print("无序数组排序后最大相邻差：")
     print(get_maxGap(input))
- 
-    
     
