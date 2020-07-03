@@ -10,7 +10,7 @@ class StackQueue:
         self.stack_in = []
         self.stack_out = []
 
-    def push(self,x):
+    def push(self, x):
         """
         将元素压入 stack_in
         """
