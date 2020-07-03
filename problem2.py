@@ -30,7 +30,7 @@ class stack:
 
     def pop(self):
         if len(self.data) == 0:
-            print("栈空！！！")
+            return None
         else:
             tmp = self.data.pop()
             # 如果弹出的值是最小值，那么copy栈也要跟着弹出栈顶元素（当前最小值）
@@ -41,6 +41,8 @@ class stack:
         return tmp
 
     def get_min(self):
+        if len(self.data) == 0:
+            return None
         return self.copy[-1]
 
 
