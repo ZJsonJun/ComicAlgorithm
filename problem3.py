@@ -81,7 +81,7 @@ def get_greatest_common_divisor_v4(a: int, b:int):
 
 def gcd(a: int, b:int):
     """
-    最终版求两数最大公约数算法，在更相减损术基础上采用了位运算进行优化`
+    最终版求两数最大公约数算法，在更相减损术基础上采用了位运算进行优化
     """
     # 特殊情况
     if a == 0:
@@ -91,13 +91,13 @@ def gcd(a: int, b:int):
     # 一般情况
     if a == b:
         return a
-    elif (a&1)==0 and (b&1)==0:
+    elif (a&1)==0 and (b&1)==0:     # a,b皆为偶数
         return 2*gcd(a>>1,b>>1)
-    elif (a&1)==0 and (b&1)!=0:
+    elif (a&1)==0 and (b&1)!=0:     # a为偶数，b为奇数
         return gcd(a>>1,b)
-    elif (a&1)!=0 and (b&1)==0:
+    elif (a&1)!=0 and (b&1)==0:     # a为奇数，b为偶数
         return gcd(a,b>>1)
-    else:
+    else:                           # a，b皆为奇数
         big = max(a,b)
         small = min(a,b)
         c = big-small
